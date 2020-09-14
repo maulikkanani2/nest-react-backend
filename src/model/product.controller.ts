@@ -1,7 +1,9 @@
 import { HttpCode,HttpStatus , Module , Controller, Get,Post, Body, Put, Delete,Param ,UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { ProductService } from '../model/product.service';
 import { MulterModule } from '@nestjs/platform-express';
-import  {tbl_products}  from './../products.entity';
+import  tbl_products  from './products.entity';
+import {data} from '../data'
+import { json } from 'body-parser';
 
 @Module({
   imports: [MulterModule.register({
@@ -16,10 +18,27 @@ export class ProductController {
   get() {
     return this.productService.findAll()
   }
+  
+  @Get(':id')
+  async putrecord(@Param('id') id: number){
+     if(id != null){
+      for(let i=1; i<=id; i++){
+        this.productService.createProduct(data[i]);
+      }
+      return {"msg" : "Record Inserted successfully!"}
+    }
+  }
 
-  @Post()
-  create(@Body() product: tbl_products) {
-    return this.productService.createProduct(product);
+  @Post(':id')
+  create(@Param('id') id: number ,@Body() product: tbl_products) {
+    if(id != null){
+      for(let i=1; i<=id; i++){
+        this.productService.createProduct(data[i]);
+      }
+    }
+    else{
+      return this.productService.createProduct(product)
+    }
   }
 
   @Put(':id')

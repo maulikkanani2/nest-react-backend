@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner , getRepository} from "typeorm";
 
 export class ProductsTable1599803654757 implements MigrationInterface {
 

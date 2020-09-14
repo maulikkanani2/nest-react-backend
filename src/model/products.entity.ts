@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 @Entity()
-export class tbl_products {
+export default class tbl_products {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
